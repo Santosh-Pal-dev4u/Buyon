@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "218887481481",
+    "project_id": "buyon-6d24f",
+    "storage_bucket": "buyon-6d24f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218887481481:android:856e37a5acbc7e53403e58",
+        "android_client_info": {
+          "package_name": "com.santosh.buyon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218887481481-omr2dos6q7qch4aa3t5r53lvshlksg4a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVZ0SwEAgDQW5U3d-BcB71oDv4N7sxq-o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218887481481-omr2dos6q7qch4aa3t5r53lvshlksg4a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

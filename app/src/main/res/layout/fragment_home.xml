@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <com.mancj.materialsearchbar.MaterialSearchBar
+            android:id="@+id/searchBar"
+            style="@style/MaterialSearchBarLight"
+            android:layout_width="320dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            app:mt_hintColor="@color/teal_200"
+            app:mt_placeholder="Search "
+            app:mt_speechIconDrawable="@drawable/search_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:mt_hint="Search your product"
+            app:mt_maxSuggestionsCount="10"
+
+            app:mt_speechMode="true" />
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+    <androidx.core.widget.NestedScrollView
+
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_search">
+
+
+        <FrameLayout
+
+
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".HomeFragment">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:cardCornerRadius="10dp"
+                app:cardElevation="7dp"
+                app:cardUseCompatPadding="true">
+
+
+                <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+                    android:id="@+id/carousel"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+
+                    app:autoPlay="true"
+                    app:autoPlayDelay="2500"
+
+                    app:captionMargin="0dp"
+
+                    app:captionTextSize="14sp"
+
+                    app:carouselBackground="#00000000"
+
+                    app:imageScaleType="centerCrop"
+
+
+                    app:indicatorMargin="0dp"
+                    app:infiniteCarousel="true"
+                    app:showBottomShadow="false"
+
+                    app:showCaption="false"
+
+                    app:showIndicator="true"
+                    app:showNavigationButtons="false"
+                    app:showTopShadow="false"
+                    app:touchToPause="true"
+
+                    />
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="220dp"
+                android:elevation="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardUseCompatPadding="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="CATEGORY"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_for_category_items"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="370dp"
+                android:elevation="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardUseCompatPadding="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Trending"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_for_products"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="33dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </FrameLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

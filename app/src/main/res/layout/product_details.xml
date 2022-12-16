@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".product_details"
+    >
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+        tools:ignore="MissingClass">
+
+
+    <androidx.cardview.widget.CardView
+
+        android:id="@+id/cardview_for_product_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="7dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+            android:id="@+id/carousel_product_image"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+
+            app:autoPlay="true"
+            app:autoPlayDelay="2000"
+
+            app:captionMargin="0dp"
+
+            app:captionTextSize="14sp"
+
+            app:carouselBackground="#00000000"
+
+            app:imageScaleType="fitCenter"
+
+
+            app:indicatorMargin="0dp"
+            app:infiniteCarousel="true"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintHorizontal_bias="0.0"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showBottomShadow="false"
+            app:showCaption="false"
+
+            app:showIndicator="true"
+            app:showNavigationButtons="false"
+            app:showTopShadow="false"
+            app:touchToPause="true" />
+
+    </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardview_for_product_img">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:text="Product_name"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+
+
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingStart="10dp"
+                    android:text="₹"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Product_price"
+                    android:textColor="@color/red_dark"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <com.airbnb.lottie.LottieAnimationView
+
+                    android:layout_width="190dp"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop"
+                    android:scaleX="1.4"
+                    app:lottie_speed=".7"
+                    android:scaleY="1.4"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/add_to_cart" />
+
+                <com.airbnb.lottie.LottieAnimationView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop"
+                    android:scaleX="2"
+                    app:lottie_speed=".3"
+                    android:scaleY="2"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/buy_now" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        app:tabTextColor="#727E73"
+
+                        app:tabIndicatorColor="@color/black"
+                        app:tabMode="fixed"
+
+
+                        >
+
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Details">
+
+                        </com.google.android.material.tabs.TabItem>
+
+                    </com.google.android.material.tabs.TabLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="30dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:text="Product details"
+                        />
+
+
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</FrameLayout>

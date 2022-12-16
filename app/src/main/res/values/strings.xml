@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Shop@</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="facebook_app_id">2737353366395600</string>
+    <string name="fb_login_protocol_scheme">fb2737353366395600</string>
+    <string name="facebook_client_token">3974227808ee593b9c2d0c0ce5cb5cc2</string>
+
+
+</resources>
