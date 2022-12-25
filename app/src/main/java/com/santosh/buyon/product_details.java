@@ -2,7 +2,11 @@ package com.santosh.buyon;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
@@ -10,21 +14,34 @@ import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
 import java.util.ArrayList;
 
 public class product_details extends AppCompatActivity {
+    TextView product_name,product_price,product_datails_txt;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_details);
 
+        String price=getIntent().getExtras().getString("price");
+        String Title=getIntent().getExtras().getString("name");
+        String imgd=getIntent().getExtras().getString("img");
+        String productdescription=getIntent().getExtras().getString("Productdescription");
+        String productimage=getIntent().getExtras().getString("Productimage");
+      //  String imgd= String.valueOf(Glide.with(this).load("img"));
 
-
+        product_datails_txt=findViewById(R.id.product_datails_txt);
+        product_datails_txt.setText(productdescription);
+        product_name=findViewById(R.id.product_name);
+        product_name.setText(Title);
+        product_price=findViewById(R.id.product_price);
+        product_price.setText(price);
         ImageCarousel carousel = findViewById(R.id.carousel_product_image);
 
         ArrayList<CarouselItem> banner =new ArrayList<>();
-        banner.add(new CarouselItem("https://assets3.cbsnewsstatic.com/hub/i/2022/09/07/30988df2-6682-44db-a1e5-a5b6a9ccd006/iphone-14-pro.png",""));
-        banner.add(new CarouselItem("https://phonecharacteristics.com/link_img/423700631cf9bea7816.jpg",""));
-        banner.add(new CarouselItem("https://images.ctfassets.net/vx12w8gtks6f/342Ffp88l7pPVkZadHT57A/53223abada02e38555723f8bfafce198/PEP_Carousel_4_top_frontback_iphone14ProMax_purple_PreOrder_EN.png",""));
-        banner.add(new CarouselItem("https://cdn.shopify.com/s/files/1/0593/0480/4531/products/IPHONE14PROMAX7_COLOR-GOLD_CAPACITY-ALL_1000x.png?v=1664874449",""));
+
+
+          banner.add(new CarouselItem(imgd));
+
 
 
         carousel.setData(banner);

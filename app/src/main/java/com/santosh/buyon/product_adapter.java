@@ -39,7 +39,8 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Myview
 
         Glide.with(context).load(arrayList.get(position).getImg()).into(holder.imageView);
         holder.textView.setText(arrayList.get(position).getPrice());
-        holder.textView2.setText(arrayList.get(position).getName());
+        holder.textView2.setText(arrayList.get(position).getTitle());
+
 
 
     }
@@ -52,7 +53,7 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Myview
     public class Myviewholder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
-        TextView textView, textView2;
+        TextView textView, textView2,textView3;
 
 
         public Myviewholder(@NonNull View itemView) {
@@ -66,6 +67,7 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Myview
             });
             textView = itemView.findViewById(R.id.textView);
             textView2 = itemView.findViewById(R.id.textView2);
+
 
         }
     }

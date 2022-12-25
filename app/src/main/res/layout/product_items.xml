@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent">
 
 
             <androidx.cardview.widget.CardView
             android:layout_width="160dp"
 
+
             app:cardUseCompatPadding="true"
-                android:elevation="10dp"
+
                 app:cardCornerRadius="10dp"
             android:layout_height="wrap_content">
 
@@ -56,7 +57,7 @@
                    <TextView
                        android:id="@+id/textView2"
                        android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
+                       android:layout_height="40dp"
                        android:layout_marginTop="4dp"
                        android:gravity="center"
                        android:text="dncnnclncdl"

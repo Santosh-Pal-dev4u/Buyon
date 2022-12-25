@@ -1,32 +1,29 @@
 package com.santosh.buyon;
 
-import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.EventListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
 
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class HomeFragment extends Fragment {
@@ -36,21 +33,65 @@ public class HomeFragment extends Fragment {
     product_adapter product_adapter;
     FirebaseFirestore firebaseFirestore;
 
-    model_product_item model_product_item;
+
     ArrayList<model_product_item> arrayList;
 
     RecyclerView recycler_view_for_category_items,recycler_view_for_products;
     String item_name[]={"Fashion","Grocery","Mobiles","Sports","Care","Furniture"};
     int item_img[]={R.drawable.img_11,R.drawable.img_9,R.drawable.img_3,R.drawable.img_7,R.drawable.img_1,R.drawable.img_sofa};
 
-    @SuppressLint("MissingInflatedId")
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
        View view= inflater.inflate(R.layout.fragment_home, container, false);
 
+        arrayList=new ArrayList<>();
+        recycler_view_for_products=view.findViewById(R.id.recycler_view_for_products);
+        product_adapter=new product_adapter(getActivity(),arrayList);
+        recycler_view_for_products.setAdapter(product_adapter);
+        recycler_view_for_products.setLayoutManager(new StaggeredGridLayoutManager(2,1));
+
+        // firebase product
        firebaseFirestore=FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("Trending Products")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                model_product_item mm=document.toObject(com.santosh.buyon.model_product_item.class);
+                                arrayList.add(mm);
+                                List<String> productimagearray = (List<String>) document.get("Productimage");
+
+                                product_adapter.setonitemclicklistner(new clickonadpater() {
+                                    @Override
+                                    public void clickme(int pos) {
+
+                                        Intent inn = new Intent(getActivity(), product_details.class);
+                                        inn.putExtra("name",""+arrayList.get(pos).getTitle());
+                                        inn.putExtra("img",""+arrayList.get(pos).getImg());
+                                        inn.putExtra("price",""+arrayList.get(pos).getPrice());
+                                        inn.putExtra("Productdescription",""+arrayList.get(pos).getProductdescription());
+                                        inn.putExtra("Productimage",""+productimagearray);
+                                        startActivity(inn);
+                                        //Toast.makeText(getActivity(), ""+arrayList.get(pos).getTitle(), Toast.LENGTH_SHORT).show();
+
+
+                                    }
+                                });
+
+                            }
+                            product_adapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+
+
+
+
+        //
 
 
        // image slider bannner
@@ -76,38 +117,11 @@ public class HomeFragment extends Fragment {
         recycler_view_for_category_items.setLayoutManager(new StaggeredGridLayoutManager(1,0));
 
 
-        // products
 
 
-        arrayList=new ArrayList<>();
-        arrayList.add(new model_product_item("https://media.istockphoto.com/id/1304528713/photo/red-jogging-sneakers-for-jogging-isolated-on-white-background-sport-shoes-modern-fashion.jpg?b=1&s=170667a&w=0&k=20&c=cyGIls0oqQk_lOWJqmb3_1O2arsZdvkF5maeqyP9G2o=","1799","Nike Air"));
-
-        arrayList.add(new model_product_item("https://cdn1.smartprix.com/rx-i90lUSCYm-w1200-h1200/90lUSCYm.jpg","3599","Samsung Watch5"));
 
 
-        arrayList.add(new model_product_item("https://cdn.shopify.com/s/files/1/0608/4988/1306/products/3263.jpg?v=1648711134","48999","Sony Bravia"));
 
-
-        arrayList.add(new model_product_item("https://m.media-amazon.com/images/I/71PfGyStYmL._SL1000_.jpg","1199","Skate Board"));
-
-        arrayList.add(new model_product_item("https://rukminim1.flixcart.com/image/832/832/l5fnhjk0/dslr-camera/f/t/m/eos-r10-24-2-r10-canon-original-imagg42fsbgv79da.jpeg?q=70","1199","Skate Board"));
-
-         product_adapter=new product_adapter(getActivity(),arrayList);
-
-        recycler_view_for_products=view.findViewById(R.id.recycler_view_for_products);
-        recycler_view_for_products.setAdapter(product_adapter);
-        recycler_view_for_products.setLayoutManager(new StaggeredGridLayoutManager(2,1));
-/*        Eventchangelistner();*/
-        product_adapter.setonitemclicklistner(new clickonadpater() {
-            @Override
-            public void clickme(int pos) {
-
-                Intent inn = new Intent(getActivity(), product_details.class);
-                startActivity(inn);
-
-
-            }
-        });
 
 
 
@@ -117,40 +131,7 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
- /*   private void Eventchangelistner() {
 
-        firebaseFirestore.collection("Trending Products")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-
-                        if(error != null){
-                            Log.e("Firebase error",error.getMessage());
-                           return;
-                        }
-                         for (DocumentChange documentChange : value.getDocumentChanges()){
-
-                             if(documentChange.getType()== DocumentChange.Type.ADDED){
-
-                                 arrayList.add(documentChange.getDocument().toObject(model_product_item.getClass()));
-
-                             }
-                             product_adapter.notifyDataSetChanged();
+    }
 
 
-                         }
-
-
-
-
-
-                    }
-                });
-
-
-
-    }*/
-
-
-}
