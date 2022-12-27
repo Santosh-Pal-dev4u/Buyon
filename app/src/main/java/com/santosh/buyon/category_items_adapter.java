@@ -10,16 +10,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
+
 public class category_items_adapter extends RecyclerView.Adapter<category_items_adapter.Myviewholder> {
 
     Context context;
-    String title[];
-    int img[];
+    ArrayList<model_category> arraycategory;
 
-    public category_items_adapter(Context context, String title[], int img[]) {
+
+    public category_items_adapter(Context context, ArrayList<model_category> arraycategory) {
         this.context = context;
-       this.title = title;
-        this.img = img;
+        this.arraycategory = arraycategory;
     }
 
     @NonNull
@@ -32,13 +35,16 @@ public class category_items_adapter extends RecyclerView.Adapter<category_items_
 
     @Override
     public void onBindViewHolder(@NonNull category_items_adapter.Myviewholder holder, int position) {
-        holder.textView.setText(title[position]);
-        holder.img.setImageResource(img[position]);
+
+
+        Glide.with(context).load(arraycategory.get(position).getImg()).into(holder.img);
+        holder.textView.setText(arraycategory.get(position).getName());
+
     }
 
     @Override
     public int getItemCount() {
-        return img.length;
+        return arraycategory.size();
     }
 
     public class Myviewholder extends RecyclerView.ViewHolder {

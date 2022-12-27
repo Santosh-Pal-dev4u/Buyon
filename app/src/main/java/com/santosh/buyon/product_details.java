@@ -4,17 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class product_details extends AppCompatActivity {
     TextView product_name,product_price,product_datails_txt;
+
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -24,10 +31,10 @@ public class product_details extends AppCompatActivity {
 
         String price=getIntent().getExtras().getString("price");
         String Title=getIntent().getExtras().getString("name");
-        String imgd=getIntent().getExtras().getString("img");
         String productdescription=getIntent().getExtras().getString("Productdescription");
-        String productimage=getIntent().getExtras().getString("Productimage");
-      //  String imgd= String.valueOf(Glide.with(this).load("img"));
+        ArrayList<String> ww=getIntent().getExtras().getStringArrayList("Productimage");
+
+
 
         product_datails_txt=findViewById(R.id.product_datails_txt);
         product_datails_txt.setText(productdescription);
@@ -35,13 +42,17 @@ public class product_details extends AppCompatActivity {
         product_name.setText(Title);
         product_price=findViewById(R.id.product_price);
         product_price.setText(price);
+
+        //imageslider
+
         ImageCarousel carousel = findViewById(R.id.carousel_product_image);
 
         ArrayList<CarouselItem> banner =new ArrayList<>();
 
 
-          banner.add(new CarouselItem(imgd));
-
+        for (int i=0;i<ww.size();i++){
+            banner.add(new CarouselItem(ww.get(i)));
+        }
 
 
         carousel.setData(banner);

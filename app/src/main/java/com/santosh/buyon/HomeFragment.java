@@ -9,9 +9,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,38 +34,47 @@ public class HomeFragment extends Fragment {
 
     product_adapter product_adapter;
     FirebaseFirestore firebaseFirestore;
+    category_items_adapter category_items_adapter;
 
 
     ArrayList<model_product_item> arrayList;
+    ArrayList<model_category>arraycategory;
 
     RecyclerView recycler_view_for_category_items,recycler_view_for_products;
-    String item_name[]={"Fashion","Grocery","Mobiles","Sports","Care","Furniture"};
-    int item_img[]={R.drawable.img_11,R.drawable.img_9,R.drawable.img_3,R.drawable.img_7,R.drawable.img_1,R.drawable.img_sofa};
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
        View view= inflater.inflate(R.layout.fragment_home, container, false);
 
         arrayList=new ArrayList<>();
+        arraycategory=new ArrayList<>();
+
+
+        // firebase product
+
         recycler_view_for_products=view.findViewById(R.id.recycler_view_for_products);
         product_adapter=new product_adapter(getActivity(),arrayList);
         recycler_view_for_products.setAdapter(product_adapter);
         recycler_view_for_products.setLayoutManager(new StaggeredGridLayoutManager(2,1));
 
-        // firebase product
-       firebaseFirestore=FirebaseFirestore.getInstance();
+
+
+        firebaseFirestore=FirebaseFirestore.getInstance();
         firebaseFirestore.collection("Trending Products")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                           // Toast.makeText(, "", Toast.LENGTH_SHORT).show();
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 model_product_item mm=document.toObject(com.santosh.buyon.model_product_item.class);
                                 arrayList.add(mm);
-                                List<String> productimagearray = (List<String>) document.get("Productimage");
+
+                               // document.toObject(model_product_item.class).getProductimage();
+
+
 
                                 product_adapter.setonitemclicklistner(new clickonadpater() {
                                     @Override
@@ -71,10 +82,10 @@ public class HomeFragment extends Fragment {
 
                                         Intent inn = new Intent(getActivity(), product_details.class);
                                         inn.putExtra("name",""+arrayList.get(pos).getTitle());
-                                        inn.putExtra("img",""+arrayList.get(pos).getImg());
                                         inn.putExtra("price",""+arrayList.get(pos).getPrice());
                                         inn.putExtra("Productdescription",""+arrayList.get(pos).getProductdescription());
-                                        inn.putExtra("Productimage",""+productimagearray);
+                                        inn.putStringArrayListExtra("Productimage", (ArrayList<String>) arrayList.get(pos).getProductimage());
+
                                         startActivity(inn);
                                         //Toast.makeText(getActivity(), ""+arrayList.get(pos).getTitle(), Toast.LENGTH_SHORT).show();
 
@@ -113,18 +124,28 @@ public class HomeFragment extends Fragment {
         // category
 
         recycler_view_for_category_items=view.findViewById(R.id.recycler_view_for_category_items);
-        recycler_view_for_category_items.setAdapter(new category_items_adapter(getActivity(),item_name,item_img));
         recycler_view_for_category_items.setLayoutManager(new StaggeredGridLayoutManager(1,0));
+        category_items_adapter=new category_items_adapter(getActivity(),arraycategory);
+        recycler_view_for_category_items.setAdapter(category_items_adapter);
+
+        firebaseFirestore=FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("Category")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            for (QueryDocumentSnapshot documentcategory : task.getResult()) {
+                                model_category m=documentcategory.toObject(model_category.class);
+                                arraycategory.add(m);
 
 
-
-
-
-
-
-
-
-
+                            }
+                            category_items_adapter.notifyDataSetChanged();
+                        }
+                    }
+                });
 
 
 

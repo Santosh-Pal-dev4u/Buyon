@@ -2,13 +2,7 @@ package com.santosh.buyon;
 
 public class model_category {
 
-    public model_category(String img, String name) {
-        this.img = img;
-
-        this.name = name;
-    }
-
-    private String img,price,name;
+    private String img,name;
 
     public String getName() {
         return name;

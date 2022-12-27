@@ -1,5 +1,7 @@
 package com.santosh.buyon;
 
+import java.util.List;
+
 public class model_product_item {
 
     public model_product_item() {
@@ -7,6 +9,8 @@ public class model_product_item {
     }
 
     private String img,Price,Title,Productdescription;
+    private List<String> Productimage;
+
 
 
     public model_product_item(String img, String price, String title, String productdescription) {
@@ -16,6 +20,18 @@ public class model_product_item {
         Productdescription = productdescription;
 
 
+    }
+
+    public model_product_item(List<String> productimage) {
+        Productimage = productimage;
+    }
+
+    public List<String> getProductimage() {
+        return Productimage;
+    }
+
+    public void setProductimage(List<String> productimage) {
+        Productimage = productimage;
     }
 
     public String getProductdescription() {
