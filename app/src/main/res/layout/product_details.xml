@@ -151,6 +151,7 @@
                     app:lottie_rawRes="@raw/add_to_cart" />-->
 
                 <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/shopnow_anim_btn"
 
                     android:layout_width="100dp"
                     android:layout_height="100dp"

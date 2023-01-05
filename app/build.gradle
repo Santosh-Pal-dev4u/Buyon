@@ -59,6 +59,8 @@ dependencies {
 
     implementation 'com.github.mancj:MaterialSearchBar:0.8.5'
 
+    implementation 'com.razorpay:checkout:1.6.20'
+
 
     implementation 'com.facebook.android:facebook-login:latest.release'
 

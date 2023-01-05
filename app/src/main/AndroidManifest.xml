@@ -58,6 +58,10 @@
             android:name="com.facebook.sdk.ClientToken"
             android:value="@string/facebook_client_token" />
 
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_test_4tBTeSXE0j4rxG" />
+
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"

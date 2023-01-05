@@ -19,7 +19,6 @@ public class model_product_item {
         Title = title;
         Productdescription = productdescription;
 
-
     }
 
     public model_product_item(List<String> productimage) {
